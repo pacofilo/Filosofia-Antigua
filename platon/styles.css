@@ -134,6 +134,66 @@ details.comentario[open] > summary { margin-bottom:10px; }
 .resumen { margin:12px 0 22px; padding:12px 16px; border-left:4px solid var(--acento-secundario); background:var(--crema-principal); border-radius:0 6px 6px 0; }
 .resumen-tit { font-size:.78em; text-transform:uppercase; letter-spacing:2px; color:var(--acento-secundario); margin-bottom:8px; }
 @media print { details.comentario > summary { display:block; } details.comentario:not([open]) > :not(summary) { display:block; } }
+
+/* ===== Diseño v2: más ancho, niveles marcados ===== */
+.container { max-width:1560px; padding:44px 22px; }
+header { padding:34px 28px; }
+.header-content { max-width:1560px; }
+section { padding:34px 30px 30px; }
+section.intro { max-width:1100px; margin-left:auto; margin-right:auto; }
+
+/* Nivel 1: centrado, mayúsculas, número romano */
+section h2 { text-align:center; text-transform:uppercase; letter-spacing:.06em; font-size:1.7em; font-weight:500; margin:6px 0 34px; padding-bottom:18px; border-bottom:1px solid var(--borde-sutil); line-height:1.3; }
+section.intro h2 { text-transform:none; letter-spacing:0; font-size:2em; font-weight:400; border-bottom:0; padding-bottom:0; }
+section h2 .num { color:var(--acento-secundario); font-weight:600; margin-right:.25em; }
+.grupo-cab { display:block; }
+.grupo-cab .miniatura { float:none; display:block; margin:0 auto 16px; }
+
+/* Nivel 2: caja de color */
+.caja { background:#F7EFE0; border:2px solid var(--acento-secundario); border-left-width:8px; border-radius:8px; padding:20px 26px 10px; margin:0 0 26px; box-shadow:0 2px 8px rgba(139,115,85,.10); }
+.caja > .parrafo:first-child p { color:var(--texto-oscuro); }
+
+/* Niveles inferiores: más tabulación y guía más visible */
+.hijos { margin:6px 0 14px 18px; padding-left:44px; border-left:2px solid #D9C7A8; }
+.hijos .hijos { border-left-color:#E6D8BF; }
+.hijos .hijos .hijos { border-left-style:dashed; }
+.caja .hijos { background:transparent; }
+
+/* Índice */
+.toc a.toc-card { text-transform:uppercase; letter-spacing:.04em; font-size:.9em; color:var(--acento-primario); font-weight:700; margin-top:14px; }
+.toc a.toc-sub { position:relative; color:#A9825A; padding-left:34px; font-size:.9em; }
+.toc a.toc-sub::before { content:'◆'; position:absolute; left:14px; top:.62em; font-size:.55em; color:var(--acento-secundario); transform:translateY(-10%); }
+.toc a.toc-sub:hover { color:var(--acento-primario); }
+
+@media (max-width:768px) {
+  .container { padding:20px 8px; }
+  section { padding:20px 12px; }
+  section h2 { font-size:1.25em; letter-spacing:.03em; }
+  .caja { padding:14px 12px 6px; border-left-width:6px; }
+  .hijos { margin-left:4px; padding-left:16px; }
+}
+@media print {
+  .container { max-width:none; }
+  .caja { background:none; box-shadow:none; border-width:1px; border-left-width:4px; padding:8px 10px 2px; break-inside:auto; }
+  section h2 { font-size:15pt; }
+  .hijos { padding-left:20px; }
+}
+.acciones{flex-wrap:wrap;max-width:100%}
+.enlace-ext{max-width:100%;overflow-wrap:anywhere;white-space:normal}
+
+/* v2.1: miniaturas a la derecha y interlineado reducido en niveles inferiores */
+.parrafo > .miniatura { float:right; margin:4px 0 8px 24px; }
+.caja .parrafo { margin-bottom:2px; }
+.caja p { line-height:1.5; margin-bottom:9px; }
+.hijos { margin-top:2px; margin-bottom:8px; }
+.hijos p { line-height:1.45; margin-bottom:6px; }
+.hijos .hijos p { line-height:1.4; margin-bottom:5px; }
+@media (max-width:768px){ .parrafo > .miniatura { margin-left:12px; } }
+
+/* v2.2: el nivel 2 es el título del apartado: +3 pt y color propio para el texto sin color */
+.caja > .parrafo:first-child > p { font-size:calc(1em + 3pt); line-height:1.45; }
+.c-n2 { color:#1F4E79; }
+@media print { .caja > .parrafo:first-child > p { font-size:calc(1em + 3pt); } }
 .c-000080{color:#000080}
 .c-0000ff{color:#0000ff}
 .c-003300{color:#003300}
