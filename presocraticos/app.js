@@ -21,7 +21,7 @@
     if (e.key === 'Escape') { if (visor.classList.contains('active')) cerrar(visor); else cerrar(notaModal); }
   });
   // Imprimir / guardar como PDF desde el navegador
-  function cargarTodo() { document.querySelectorAll('img[loading=lazy]').forEach(function (i) { i.loading = 'eager'; }); }
+  function cargarTodo() { document.querySelectorAll('details').forEach(function (d) { d.open = true; }); document.querySelectorAll('img[loading=lazy]').forEach(function (i) { i.loading = 'eager'; }); }
   window.addEventListener('beforeprint', cargarTodo);
   var bi = document.getElementById('btn-imprimir');
   if (bi) bi.addEventListener('click', function () { cargarTodo(); setTimeout(function () { window.print(); }, 400); });
