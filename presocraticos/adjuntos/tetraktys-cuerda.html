@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>De la tetraktys a la cuerda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-deep:#1B120D;
+    --bg-panel:#241A13;
+    --wood:#3B2A1E;
+    --wood-light:#55402C;
+    --peras:#C4914B;
+    --peras-dim:#8A6432;
+    --apeiron:#7C8CA0;
+    --parchment:#EFE3CC;
+    --muted:#A8977D;
+    --line:#4A3826;
+    --g0:#E8C784; --g1:#D4A857; --g2:#B98A3F; --g3:#8A6432;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg-deep);
+    color:var(--parchment);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;margin:0 0 .3em 0;}
+  .wrap{max-width:780px;margin:0 auto;padding:0 22px 100px;}
+
+  header.hero{padding:56px 0 30px;}
+  header.hero .eyebrow{
+    font-family:'Fraunces',serif;font-style:italic;font-size:1.05rem;
+    color:var(--peras);margin-bottom:10px;
+  }
+  header.hero h1{font-size:clamp(2rem,5.5vw,2.7rem);}
+  header.hero p{max-width:62ch;color:var(--muted);font-size:1.05rem;}
+
+  /* mini tetraktys reference, sticky-ish top */
+  .tetraktys-ref{
+    display:flex;
+    align-items:center;
+    gap:24px;
+    background:var(--bg-panel);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:18px 22px;
+    margin:8px 0 40px;
+    flex-wrap:wrap;
+  }
+  .tetraktys-ref svg{flex:0 0 110px;width:110px;height:96px;}
+  .tetraktys-ref p{margin:0;color:var(--muted);font-size:.92rem;}
+  .tetraktys-ref b{color:var(--parchment);}
+
+  /* comparison panel per ratio */
+  .ratio-panel{
+    background:linear-gradient(180deg,var(--bg-panel),var(--wood) 220%);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:30px 26px;
+    margin:26px 0;
+  }
+  .ratio-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:6px;
+  }
+  .ratio-head h2{font-size:1.4rem;color:var(--parchment);}
+  .ratio-tag{
+    font-family:'Fraunces',serif;font-style:italic;
+    color:var(--peras);font-size:1.1rem;
+  }
+  .rows-note{color:var(--muted);font-size:.9rem;margin-bottom:22px;}
+  .rows-note b{color:var(--parchment);}
+
+  .string-row{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    margin:14px 0;
+  }
+  .string-row .row-tag{
+    font-family:'Fraunces',serif;
+    font-size:1rem;
+    color:var(--muted);
+    width:64px;
+    flex-shrink:0;
+  }
+  .string-row svg{flex:1;height:36px;min-width:0;}
+  .string-row .freq{
+    width:78px;
+    text-align:right;
+    font-size:.85rem;
+    color:var(--muted);
+    flex-shrink:0;
+  }
+
+  .controls{
+    display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;align-items:center;
+  }
+  button.pluck, button.pluck-both{
+    font-family:'Inter',sans-serif;font-weight:600;font-size:.9rem;
+    border:none;border-radius:4px;padding:11px 18px;cursor:pointer;
+    transition:transform .12s ease, background .2s ease;
+  }
+  button.pluck{background:var(--wood-light);color:var(--parchment);}
+  button.pluck:hover{background:#6B5138;}
+  button.pluck-both{background:var(--peras);color:#1B120D;}
+  button.pluck-both:hover{background:#D8A55D;}
+  button:active{transform:scale(.97);}
+
+  .explain{
+    margin-top:20px;
+    color:var(--parchment);
+    font-size:.96rem;
+    border-top:1px solid var(--line);
+    padding-top:16px;
+  }
+  .explain p + p{margin-top:8px;}
+  .term{color:var(--peras);font-style:italic;}
+
+  footer{text-align:center;color:var(--muted);font-size:.82rem;margin-top:60px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">Filosofía · Presocráticos</div>
+    <h1>De la tetraktys a la cuerda</h1>
+    <p>La tetraktys son cuatro filas: 1, 2, 3 y 4 puntos. Cada par de filas consecutivas —2 y 1, 3 y 2, 4 y 3— es también una proporción que puedes pisar y escuchar en una cuerda de guitarra. Compara y pulsa cada par.</p>
+  </header>
+
+  <div class="tetraktys-ref">
+    <svg viewBox="0 0 160 140">
+      <circle class="g0" cx="80" cy="15" r="7"/>
+      <circle class="g1" cx="65" cy="45" r="7"/><circle class="g1" cx="95" cy="45" r="7"/>
+      <circle class="g2" cx="50" cy="75" r="7"/><circle class="g2" cx="80" cy="75" r="7"/><circle class="g2" cx="110" cy="75" r="7"/>
+      <circle class="g3" cx="35" cy="105" r="7"/><circle class="g3" cx="65" cy="105" r="7"/><circle class="g3" cx="95" cy="105" r="7"/><circle class="g3" cx="125" cy="105" r="7"/>
+    </svg>
+    <p>Fila 1 (1 punto) · Fila 2 (2 puntos) · Fila 3 (3 puntos) · Fila 4 (4 puntos). <b>1+2+3+4 = 10</b>, el número perfecto. Las tres proporciones entre filas vecinas son las tres consonancias musicales fundamentales.</p>
+  </div>
+
+  <!-- OCTAVA 2:1 -->
+  <section class="ratio-panel" data-panel="octava">
+    <div class="ratio-head">
+      <h2>Fila 2 y fila 1</h2>
+      <span class="ratio-tag">razón 2:1 — la octava</span>
+    </div>
+    <div class="rows-note">La cuerda entera, <b>fila 1</b> (longitud 1/1), frente al punto de <b>fila 2</b> (longitud 1/2). En cada panel, fila <em>n</em> es siempre 1/n de la misma cuerda.</div>
+
+    <div class="string-row">
+      <span class="row-tag">Fila 1</span>
+      <svg viewBox="0 0 400 20" preserveAspectRatio="none"><line x1="4" y1="10" x2="396" y2="10" stroke="#D9CBAE" stroke-width="3" class="s-line" data-ratio="1"/></svg>
+      <span class="freq">196 Hz</span>
+    </div>
+    <div class="string-row">
+      <span class="row-tag">Fila 2</span>
+      <svg viewBox="0 0 400 20" preserveAspectRatio="none"><line x1="4" y1="10" x2="200" y2="10" stroke="#EAD9AE" stroke-width="3" class="s-line" data-ratio="0.5"/></svg>
+      <span class="freq">392 Hz</span>
+    </div>
+
+    <div class="controls">
+      <button class="pluck" data-ratio="1">Pulsar fila 1</button>
+      <button class="pluck" data-ratio="0.5">Pulsar fila 2</button>
+      <button class="pluck-both" data-ratios="1,0.5">Pulsar las dos juntas</button>
+    </div>
+
+    <div class="explain">
+      <p>Pisa el traste justo en la mitad de la cuerda y te queda una longitud <span class="term">1/2</span>. Esa mitad vibra al <b>doble</b> de frecuencia: la misma nota, pero una octava más aguda. Es el intervalo más simple y más "fundido" que existe — casi suenan como una sola nota.</p>
+    </div>
+  </section>
+
+  <!-- QUINTA 3:2 -->
+  <section class="ratio-panel" data-panel="quinta">
+    <div class="ratio-head">
+      <h2>Fila 3 y fila 2</h2>
+      <span class="ratio-tag">razón 3:2 — la quinta</span>
+    </div>
+    <div class="rows-note">Sobre la misma cuerda entera: el punto de <b>fila 2</b> (mitad, 1/2) frente al punto de <b>fila 3</b> (un tercio, 1/3).</div>
+
+    <div class="string-row">
+      <span class="row-tag">Fila 2</span>
+      <svg viewBox="0 0 400 20" preserveAspectRatio="none"><line x1="4" y1="10" x2="200" y2="10" stroke="#D9CBAE" stroke-width="3" class="s-line" data-ratio="0.5"/></svg>
+      <span class="freq">392 Hz</span>
+    </div>
+    <div class="string-row">
+      <span class="row-tag">Fila 3</span>
+      <svg viewBox="0 0 400 20" preserveAspectRatio="none"><line x1="4" y1="10" x2="133" y2="10" stroke="#EAD9AE" stroke-width="3" class="s-line" data-ratio="0.3333"/></svg>
+      <span class="freq">588 Hz</span>
+    </div>
+
+    <div class="controls">
+      <button class="pluck" data-ratio="0.5">Pulsar fila 2</button>
+      <button class="pluck" data-ratio="0.3333">Pulsar fila 3</button>
+      <button class="pluck-both" data-ratios="0.5,0.3333">Pulsar las dos juntas</button>
+    </div>
+
+    <div class="explain">
+      <p>Fila 2 es la mitad de la cuerda (1/2, 392 Hz); fila 3 es un tercio de la misma cuerda entera (1/3, 588 Hz). La razón entre ambas es 3:2 — el intervalo entre, por ejemplo, un "do" y el "sol" que le sigue. Es la consonancia que sostiene toda la armonía tonal clásica: el "círculo de quintas" se construye apilando este mismo intervalo una y otra vez.</p>
+    </div>
+  </section>
+
+  <!-- CUARTA 4:3 -->
+  <section class="ratio-panel" data-panel="cuarta">
+    <div class="ratio-head">
+      <h2>Fila 4 y fila 3</h2>
+      <span class="ratio-tag">razón 4:3 — la cuarta</span>
+    </div>
+    <div class="rows-note">Sobre la misma cuerda entera: el punto de <b>fila 3</b> (un tercio, 1/3) frente al punto de <b>fila 4</b> (un cuarto, 1/4).</div>
+
+    <div class="string-row">
+      <span class="row-tag">Fila 3</span>
+      <svg viewBox="0 0 400 20" preserveAspectRatio="none"><line x1="4" y1="10" x2="133" y2="10" stroke="#D9CBAE" stroke-width="3" class="s-line" data-ratio="0.3333"/></svg>
+      <span class="freq">588 Hz</span>
+    </div>
+    <div class="string-row">
+      <span class="row-tag">Fila 4</span>
+      <svg viewBox="0 0 400 20" preserveAspectRatio="none"><line x1="4" y1="10" x2="100" y2="10" stroke="#EAD9AE" stroke-width="3" class="s-line" data-ratio="0.25"/></svg>
+      <span class="freq">784 Hz</span>
+    </div>
+
+    <div class="controls">
+      <button class="pluck" data-ratio="0.3333">Pulsar fila 3</button>
+      <button class="pluck" data-ratio="0.25">Pulsar fila 4</button>
+      <button class="pluck-both" data-ratios="0.3333,0.25">Pulsar las dos juntas</button>
+    </div>
+
+    <div class="explain">
+      <p>Fila 3 es un tercio de la cuerda entera (1/3, 588 Hz); fila 4 es un cuarto de esa misma cuerda (1/4, 784 Hz). La razón entre ambas es 4:3: el intervalo entre "do" y "fa". Es la más "tensa" de las tres consonancias — pide resolución hacia otra nota con más claridad que la quinta o la octava.</p>
+    </div>
+  </section>
+
+  <section class="ratio-panel" style="border-color:var(--peras-dim);">
+    <div class="ratio-head">
+      <h2>Por qué importa</h2>
+    </div>
+    <div class="explain" style="border-top:none;padding-top:0;margin-top:0;">
+      <p>La tetraktys no da longitudes de cuerda: da los números puros 1, 2, 3, 4. Pero las razones entre sus filas vecinas —2/1, 3/2, 4/3— resultan ser, aplicadas a una cuerda física, exactamente las tres únicas proporciones que el oído humano reconoce como perfectamente consonantes. Para un pitagórico esto no era casualidad ni metáfora: era la prueba de que <span class="term">lo bello que se oye</span> y <span class="term">lo ordenado que se cuenta</span> son, literalmente, la misma proporción. De ahí la tesis central: "todo es número".</p>
+    </div>
+  </section>
+
+  <footer>IES Alquipir · Filosofía, 2º Bachillerato</footer>
+</div>
+
+<script>
+(function(){
+  const AudioCtx = window.AudioContext || window.webkitAudioContext;
+  let ctx = null;
+  const BASE_FREQ = 196;
+
+  function ensureCtx(){
+    if(!ctx){ ctx = new AudioCtx(); }
+    if(ctx.state === 'suspended'){ ctx.resume(); }
+    return ctx;
+  }
+
+  function pluckOne(ratio, when, panEl){
+    const freq = BASE_FREQ / ratio;
+    const now = when;
+    const master = ctx.createGain();
+    master.gain.setValueAtTime(0.0001, now);
+    master.gain.exponentialRampToValueAtTime(0.45, now + 0.008);
+    master.gain.exponentialRampToValueAtTime(0.0001, now + 1.8);
+    master.connect(ctx.destination);
+
+    const partials = [
+      {mult:1, gain:1.0, type:'triangle'},
+      {mult:2, gain:0.32, type:'sine'},
+      {mult:3, gain:0.14, type:'sine'}
+    ];
+    partials.forEach(p=>{
+      const osc = ctx.createOscillator();
+      osc.type = p.type;
+      osc.frequency.value = freq * p.mult;
+      const g = ctx.createGain();
+      g.gain.value = p.gain;
+      osc.connect(g);
+      g.connect(master);
+      osc.start(now);
+      osc.stop(now + 1.9);
+    });
+
+    if(panEl){
+      panEl.animate([
+        {transform:'scaleY(1)'},{transform:'scaleY(2.4)'},
+        {transform:'scaleY(0.6)'},{transform:'scaleY(1)'}
+      ], {duration:260, easing:'ease-out'});
+    }
+  }
+
+  document.querySelectorAll('button.pluck').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      ensureCtx();
+      const ratio = parseFloat(btn.dataset.ratio);
+      const panel = btn.closest('.ratio-panel');
+      const line = panel.querySelector(`.s-line[data-ratio="${btn.dataset.ratio}"]`);
+      pluckOne(ratio, ctx.currentTime, line);
+    });
+  });
+
+  document.querySelectorAll('button.pluck-both').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      ensureCtx();
+      const ratios = btn.dataset.ratios.split(',').map(parseFloat);
+      const panel = btn.closest('.ratio-panel');
+      const now = ctx.currentTime;
+      ratios.forEach(r=>{
+        const line = panel.querySelector(`.s-line[data-ratio="${r}"]`);
+        pluckOne(r, now, line);
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>

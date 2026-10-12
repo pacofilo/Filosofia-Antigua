@@ -1,0 +1,600 @@
+<title>El Gnomón Pitagórico</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+  :root{
+    --bg: #F1E6D2;
+    --surface: #FBF4E6;
+    --surface-2: #E8DBC0;
+    --ink: #2B2016;
+    --ink-muted: #7C6C55;
+    --line: #D9C7A4;
+    --line-strong: #B7A27C;
+    --accent-peras: #A84A2A;
+    --accent-peras-ink: #7C371D;
+    --accent-apeiron: #2C6478;
+    --accent-apeiron-ink: #1F4657;
+    --dot-old: #B7A47F;
+    --focus: #7C371D;
+
+    --font-display: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+    --font-body: 'DM Sans', -apple-system, 'Segoe UI', sans-serif;
+    --font-mono: 'IBM Plex Mono', 'SFMono-Regular', Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg: #1B140D;
+      --surface: #241B12;
+      --surface-2: #2E2216;
+      --ink: #EFE4CC;
+      --ink-muted: #A8987A;
+      --line: #3C2E1D;
+      --line-strong: #59452C;
+      --accent-peras: #E28857;
+      --accent-peras-ink: #F0A67C;
+      --accent-apeiron: #6FB6CE;
+      --accent-apeiron-ink: #97CEE0;
+      --dot-old: #6B5C42;
+      --focus: #F0A67C;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg: #1B140D;
+    --surface: #241B12;
+    --surface-2: #2E2216;
+    --ink: #EFE4CC;
+    --ink-muted: #A8987A;
+    --line: #3C2E1D;
+    --line-strong: #59452C;
+    --accent-peras: #E28857;
+    --accent-peras-ink: #F0A67C;
+    --accent-apeiron: #6FB6CE;
+    --accent-apeiron-ink: #97CEE0;
+    --dot-old: #6B5C42;
+    --focus: #F0A67C;
+  }
+
+  *{ box-sizing: border-box; }
+  body{
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  main, header, footer{
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .wide{ max-width: 940px; }
+
+  header.page-head{
+    padding-top: 56px;
+    padding-bottom: 8px;
+  }
+  .eyebrow{
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--accent-peras-ink);
+  }
+  h1{
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(34px, 5vw, 50px);
+    line-height: 1.08;
+    margin: 10px 0 12px;
+    text-wrap: balance;
+  }
+  .subtitle{
+    font-size: 18px;
+    color: var(--ink-muted);
+    max-width: 60ch;
+    margin: 0 0 28px;
+  }
+  h2{
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 28px;
+    margin: 0 0 14px;
+    text-wrap: balance;
+  }
+  h3{
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: .01em;
+    margin: 0 0 4px;
+  }
+  p{ margin: 0 0 16px; max-width: 66ch; }
+  .prose p:last-child{ margin-bottom: 0; }
+  em.gr{ font-style: italic; color: var(--ink); }
+  .gloss{ color: var(--ink-muted); font-size: 15px; }
+
+  section{ padding: 40px 0; border-top: 1px solid var(--line); }
+  section:first-of-type{ border-top: none; }
+
+  /* --- Lab / interactive figure --- */
+  .lab-intro{ margin-bottom: 22px; }
+  .legend{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--ink-muted);
+    margin-bottom: 20px;
+  }
+  .legend .swatch{
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .legend .dot{
+    width: 10px; height: 10px; border-radius: 50%;
+    display: inline-block;
+  }
+  .dot.old{ background: var(--dot-old); }
+  .dot.peras{ background: var(--accent-peras); }
+  .dot.apeiron{ background: var(--accent-apeiron); }
+
+  .lab-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    align-items: start;
+  }
+  @media (max-width: 680px){
+    .lab-grid{ grid-template-columns: 1fr; }
+  }
+  .panel{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 20px 20px 18px;
+  }
+  .panel .tag{
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  .panel-square .tag{ color: var(--accent-peras-ink); }
+  .panel-rect .tag{ color: var(--accent-apeiron-ink); }
+  .panel h3{ margin-top: 2px; }
+  .figure-wrap{
+    margin: 14px 0 12px;
+    display: flex;
+    justify-content: center;
+  }
+  .figure-wrap svg{ width: 100%; height: auto; max-width: 260px; }
+  .panel-square circle.new{ fill: var(--accent-peras); }
+  .panel-rect circle.new{ fill: var(--accent-apeiron); }
+  circle.old{ fill: var(--dot-old); opacity: 1; }
+  circle.new{ stroke: var(--surface); stroke-width: 1.5px; opacity: 1; }
+  circle.hidden{ opacity: 0; }
+  circle{ transition: opacity .22s ease, fill .22s ease; }
+  rect.bbox{ fill: none; stroke: var(--line-strong); stroke-width: 1.4; }
+  @media (prefers-reduced-motion: reduce){ circle{ transition: none; } }
+
+  .dims{
+    font-family: var(--font-mono);
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px dashed var(--line);
+    padding-top: 10px;
+    margin: 4px 0 6px;
+  }
+  .dims .val{ font-weight: 600; font-variant-numeric: tabular-nums; }
+  .panel-square .dims .val{ color: var(--accent-peras-ink); }
+  .panel-rect .dims .val{ color: var(--accent-apeiron-ink); }
+  .equation{
+    font-family: var(--font-mono);
+    font-size: 14.5px;
+    color: var(--ink-muted);
+    font-variant-numeric: tabular-nums;
+    margin: 0;
+  }
+  .equation .new-term{ font-weight: 700; }
+  .panel-square .equation .new-term{ color: var(--accent-peras-ink); }
+  .panel-rect .equation .new-term{ color: var(--accent-apeiron-ink); }
+  .equation .total{ color: var(--ink); font-weight: 600; }
+  .ratio{
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-muted);
+    margin: 8px 0 0;
+    display: flex;
+    justify-content: space-between;
+  }
+  .ratio .val{ font-weight: 600; font-variant-numeric: tabular-nums; }
+  .panel-square .ratio .val{ color: var(--accent-peras-ink); }
+  .panel-rect .ratio .val{ color: var(--accent-apeiron-ink); }
+
+  /* --- Clarify callout --- */
+  .clarify{
+    margin-top: 30px;
+    padding: 22px 24px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--accent-peras-ink);
+    border-radius: 10px;
+  }
+  .clarify h3{ font-size: 17px; margin-bottom: 10px; }
+  .clarify p{ max-width: 70ch; }
+  .ratio-table{
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+    margin: 16px 0 6px;
+    font-variant-numeric: tabular-nums;
+  }
+  .ratio-table th, .ratio-table td{
+    text-align: right;
+    padding: 6px 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  .ratio-table th:first-child, .ratio-table td:first-child{ text-align: left; }
+  .ratio-table thead th{
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    border-bottom: 1px solid var(--line-strong);
+  }
+  .ratio-table td.sq-val{ color: var(--accent-peras-ink); font-weight: 600; }
+  .ratio-table td.rc-val{ color: var(--accent-apeiron-ink); font-weight: 600; }
+
+  .stepper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 26px;
+    flex-wrap: wrap;
+  }
+  .stepper button{
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 14px;
+    background: var(--surface);
+    color: var(--ink);
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    padding: 9px 18px;
+    cursor: pointer;
+  }
+  .stepper button:hover:not(:disabled){ border-color: var(--accent-peras-ink); }
+  .stepper button:disabled{ opacity: .4; cursor: default; }
+  .stepper button:focus-visible, .step-dots button:focus-visible{
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+  .step-dots{ display: flex; gap: 8px; }
+  .step-dots button{
+    width: 30px; height: 30px; border-radius: 50%;
+    border: 1px solid var(--line-strong);
+    background: var(--surface);
+    color: var(--ink-muted);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    cursor: pointer;
+    padding: 0;
+  }
+  .step-dots button.active{
+    background: var(--ink);
+    color: var(--bg);
+    border-color: var(--ink);
+  }
+  figcaption.note{
+    font-size: 13px;
+    color: var(--ink-muted);
+    text-align: center;
+    margin-top: 22px;
+    max-width: 56ch;
+    margin-left: auto; margin-right: auto;
+  }
+
+  /* --- Comparison callout --- */
+  .compare-panel{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--surface);
+  }
+  @media (max-width: 680px){
+    .compare-panel{ grid-template-columns: 1fr; }
+    .compare-col.left{ border-right: none; border-bottom: 1px solid var(--line); }
+  }
+  .compare-col{ padding: 26px 24px; }
+  .compare-col.left{ border-right: 1px solid var(--line); }
+  .compare-col .gr-term{
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 26px;
+    display: block;
+    margin-bottom: 2px;
+  }
+  .compare-col.left .gr-term{ color: var(--accent-peras-ink); }
+  .compare-col.right .gr-term{ color: var(--accent-apeiron-ink); }
+  .compare-col .en{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    display: block;
+    margin-bottom: 14px;
+  }
+  .compare-col .fact{
+    font-family: var(--font-mono);
+    font-size: 14px;
+    background: var(--surface-2);
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin: 0 0 14px;
+    font-variant-numeric: tabular-nums;
+  }
+  .compare-col p{ font-size: 15px; margin-bottom: 0; }
+
+  footer{
+    padding: 30px 24px 60px;
+    font-size: 13px;
+    color: var(--ink-muted);
+    border-top: 1px solid var(--line);
+    margin-top: 10px;
+  }
+  footer p{ max-width: none; margin: 0; }
+</style>
+
+<header class="page-head">
+  <p class="eyebrow">Pitágoras · Peras y Ápeiron</p>
+  <h1>El gnomón pitagórico</h1>
+  <p class="subtitle">Por qué un número impar «cierra» siempre la misma forma, y un número par nunca la cierra.</p>
+</header>
+
+<main>
+  <section class="intro prose">
+    <p>Los pitagóricos no pensaban el número como un símbolo abstracto, sino como una cantidad de <em class="gr">ψῆφοι</em> (psêphoi) — piedrecitas de cálculo, las mismas que dan nombre a la palabra «calcular» (del latín <em>calculus</em>, piedra) — dispuestas formando figuras. Un <strong>gnomon</strong> es la franja en forma de L que se añade alrededor de una figura para agrandarla sin destruirla.</p>
+    <p>La pregunta que de verdad importa no es geométrica, sino esta: ¿qué le pasa a la forma cuando siempre añades un gnomon <em>impar</em>, frente a cuando siempre añades uno <em>par</em>? Muévete paso a paso por las dos series y compara.</p>
+  </section>
+
+  <section class="lab wide">
+    <h2>La misma operación, dos destinos distintos</h2>
+    <div class="legend" aria-hidden="false">
+      <span class="swatch"><span class="dot old"></span> piedra ya colocada</span>
+      <span class="swatch"><span class="dot peras"></span> gnomon nuevo — cuadrado</span>
+      <span class="swatch"><span class="dot apeiron"></span> gnomon nuevo — heterómekes</span>
+    </div>
+
+    <div class="lab-grid">
+      <article class="panel panel-square" aria-labelledby="sq-title">
+        <p class="tag">Gnomon impar</p>
+        <h3 id="sq-title">Cuadrado — τετράγωνος (tetrágōnos)</h3>
+        <div class="figure-wrap">
+          <svg id="sq-svg" viewBox="0 0 192 192" role="img" aria-label="Construcción de un número cuadrado añadiendo gnomones impares"></svg>
+        </div>
+        <p class="dims">Lados <span class="val" id="sq-dims">1 × 1</span></p>
+        <p class="equation" id="sq-eq">1</p>
+        <p class="ratio">Proporción <span class="val" id="sq-ratio">1 : 1</span></p>
+      </article>
+
+      <article class="panel panel-rect" aria-labelledby="rc-title">
+        <p class="tag">Gnomon par</p>
+        <h3 id="rc-title">Heterómekes — ἑτερομήκης (heterómēkēs)</h3>
+        <div class="figure-wrap">
+          <svg id="rc-svg" viewBox="0 0 226 192" role="img" aria-label="Construcción de un número heterómekes añadiendo gnomones pares"></svg>
+        </div>
+        <p class="dims">Lados <span class="val" id="rc-dims">1 × 2</span></p>
+        <p class="equation" id="rc-eq">2</p>
+        <p class="ratio">Proporción <span class="val" id="rc-ratio">1 : 2 (0.50)</span></p>
+      </article>
+    </div>
+
+    <div class="stepper">
+      <button id="prev-btn" type="button">◂ Anterior</button>
+      <div class="step-dots" id="step-dots"></div>
+      <button id="next-btn" type="button">Siguiente ▸</button>
+    </div>
+    <figcaption class="note">Paso <span id="step-label">n = 1</span>: observa qué piedras se añaden y si el marco vuelve a ser un cuadrado o se queda torcido.</figcaption>
+
+    <div class="clarify">
+      <h3>«Pero el rectángulo también es siempre el mismo, solo que más grande» — ¿no?</h3>
+      <p>No, y ahí está lo que la palabra «igual» esconde: fíjate en la <strong>proporción</strong> entre los lados, no en el tamaño. Un cuadrado grande es una copia a escala exacta de uno pequeño — la proporción es 1:1 en los cinco pasos, sin excepción. El rectángulo, en cambio, cambia de proporción <em>en cada paso</em>: 1:2, luego 2:3, luego 3:4… Esas no son la misma forma agrandada — son formas distintas, cada vez menos alargadas, que se acercan al cuadrado sin tocarlo jamás.</p>
+      <table class="ratio-table">
+        <thead><tr><th>n</th><th>Cuadrado n:n</th><th>Rectángulo n:(n+1)</th></tr></thead>
+        <tbody id="ratio-table-body"></tbody>
+      </table>
+      <p>La columna del cuadrado no cambia nunca: 1.00, fila tras fila — por eso es <em class="gr">ἴσον</em>, igual a sí mismo. La columna del rectángulo cambia en cada fila y no repite ningún valor — por eso es <em class="gr">ἄνισον</em>: no es que crezca sin límite de tamaño, es que nunca vuelve a ser la forma que ya fue.</p>
+    </div>
+  </section>
+
+  <section class="compare">
+    <h2>Lo que se iguala y lo que nunca se iguala</h2>
+    <div class="compare-panel">
+      <div class="compare-col left">
+        <span class="gr-term">τὸ ἴσον</span>
+        <span class="en">lo igual · peras</span>
+        <p class="fact">1×1 · 2×2 · 3×3 · 4×4 · 5×5 …</p>
+        <p>Cada gnomon impar devuelve la figura a un cuadrado: los dos lados son <strong>siempre exactamente iguales</strong>. El crecimiento no se detiene, pero en cada parada se iguala consigo mismo. Eso es lo que un griego llamaría <em class="gr">ἴσον</em>: no «pequeño» ni «terminado», sino <strong>igual a sí mismo</strong>.</p>
+      </div>
+      <div class="compare-col right">
+        <span class="gr-term">τὸ ἄνισον</span>
+        <span class="en">lo desigual · ápeiron</span>
+        <p class="fact">1×2 · 2×3 · 3×4 · 4×5 · 5×6 …</p>
+        <p>Cada gnomon par devuelve la figura a un rectángulo cuyos lados difieren siempre en una unidad — nunca en cero. Por mucho que sigas añadiendo piedras, esa desigualdad no se resuelve jamás: es <em class="gr">ἄνισον</em>, <strong>desigual a sí mismo</strong>, para siempre.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="synthesis prose">
+    <h2>Por qué esto es «peras» y «ápeiron»</h2>
+    <p>Aquí está la clave que suele quedarse abstracta: <strong>límite</strong> no significa «frontera» ni «freno», e <strong>ilimitado</strong> no significa «enorme» o «infinito en tamaño». Significan otra cosa, y el gnomon lo muestra con las manos: <strong>peras</strong> es lo que hace que una serie de piedras se iguale consigo misma; <strong>ápeiron</strong> es lo que la mantiene desigual consigo misma, paso tras paso, sin resolución posible.</p>
+    <p>Por eso los pitagóricos podían decir que el número —lo determinado, lo cognoscible, el cosmos ordenado— nace exactamente en el instante en que el límite se impone sobre lo ilimitado: no porque detenga un crecimiento, sino porque convierte una desigualdad abierta en una igualdad que se repite. Es la misma distinción de Anaximandro, pero ahora se puede ver, contar y tocar piedra a piedra.</p>
+  </section>
+</main>
+
+<footer>
+  <p>Aristóteles, <em>Física</em> III 4 (el propio Aristóteles describe este experimento con el gnomon para explicar por qué los pitagóricos identifican lo par con lo ilimitado) · Aristóteles, <em>Metafísica</em> A5, 986a (tabla de los diez opuestos: incluye πέρας/ἄπειρον y τετράγωνον/ἑτερόμηκες) · Nicómaco de Gerasa, <em>Introducción a la aritmética</em> II (números cuadrados y heterómekes).</p>
+</footer>
+
+<script>
+(function(){
+  const PITCH = 34, PAD = 28, MARGIN = 16, R_OLD = 5, R_NEW = 7, MAX = 5;
+  const NS = "http://www.w3.org/2000/svg";
+
+  function squareLayers(maxS){
+    const layers = [];
+    for(let s=1; s<=maxS; s++){
+      const pts = [];
+      for(let r=1; r<=s; r++) pts.push({row:r, col:s});
+      for(let c=1; c<=s-1; c++) pts.push({row:s, col:c});
+      layers.push(pts);
+    }
+    return layers;
+  }
+  function rectLayers(maxS){
+    const layers = [];
+    for(let s=1; s<=maxS; s++){
+      const pts = [];
+      for(let c=1; c<=s+1; c++) pts.push({row:s, col:c});
+      for(let r=1; r<=s-1; r++) pts.push({row:r, col:s+1});
+      layers.push(pts);
+    }
+    return layers;
+  }
+
+  function buildFigure(svgId, layers, kind){
+    const svg = document.getElementById(svgId);
+    const bbox = document.createElementNS(NS, "rect");
+    bbox.setAttribute("class", "bbox");
+    bbox.setAttribute("rx", "6");
+    svg.appendChild(bbox);
+
+    const circles = [];
+    layers.forEach((layerPts, idx) => {
+      const layerNum = idx + 1;
+      layerPts.forEach(pt => {
+        const c = document.createElementNS(NS, "circle");
+        const cx = PAD + (pt.col - 1) * PITCH;
+        const cy = PAD + (pt.row - 1) * PITCH;
+        c.setAttribute("cx", cx);
+        c.setAttribute("cy", cy);
+        c.setAttribute("r", R_OLD);
+        c.dataset.layer = layerNum;
+        svg.appendChild(c);
+        circles.push(c);
+      });
+    });
+
+    return { svg, bbox, circles };
+  }
+
+  function updateFigure(fig, step, kind){
+    fig.circles.forEach(c => {
+      const layer = parseInt(c.dataset.layer, 10);
+      if(layer < step){
+        c.setAttribute("class", "old");
+        c.setAttribute("r", R_OLD);
+      } else if(layer === step){
+        c.setAttribute("class", "new");
+        c.setAttribute("r", R_NEW);
+      } else {
+        c.setAttribute("class", "hidden");
+        c.setAttribute("r", R_OLD);
+      }
+    });
+    let rows, cols;
+    if(kind === "square"){ rows = step; cols = step; }
+    else { rows = step; cols = step + 1; }
+    const x = PAD - MARGIN;
+    const y = PAD - MARGIN;
+    const w = (cols - 1) * PITCH + 2 * MARGIN;
+    const h = (rows - 1) * PITCH + 2 * MARGIN;
+    fig.bbox.setAttribute("x", x);
+    fig.bbox.setAttribute("y", y);
+    fig.bbox.setAttribute("width", w);
+    fig.bbox.setAttribute("height", h);
+  }
+
+  const sqLayers = squareLayers(MAX);
+  const rcLayers = rectLayers(MAX);
+  const sqTotals = []; const rcTotals = [];
+  let acc = 0; sqLayers.forEach(l => { acc += l.length; sqTotals.push(acc); });
+  acc = 0; rcLayers.forEach(l => { acc += l.length; rcTotals.push(acc); });
+  const sqTerms = sqLayers.map(l => l.length);
+  const rcTerms = rcLayers.map(l => l.length);
+
+  const sqFig = buildFigure("sq-svg", sqLayers, "square");
+  const rcFig = buildFigure("rc-svg", rcLayers, "rect");
+
+  const sqDims = document.getElementById("sq-dims");
+  const rcDims = document.getElementById("rc-dims");
+  const sqEq = document.getElementById("sq-eq");
+  const rcEq = document.getElementById("rc-eq");
+  const sqRatio = document.getElementById("sq-ratio");
+  const rcRatio = document.getElementById("rc-ratio");
+  const stepLabel = document.getElementById("step-label");
+  const prevBtn = document.getElementById("prev-btn");
+  const nextBtn = document.getElementById("next-btn");
+  const dotsWrap = document.getElementById("step-dots");
+  const ratioTableBody = document.getElementById("ratio-table-body");
+
+  for(let s=1; s<=MAX; s++){
+    const tr = document.createElement("tr");
+    tr.innerHTML = "<td>" + s + "</td>" +
+      "<td class=\"sq-val\">" + s + ":" + s + " = 1.00</td>" +
+      "<td class=\"rc-val\">" + s + ":" + (s+1) + " = " + (s/(s+1)).toFixed(2) + "</td>";
+    ratioTableBody.appendChild(tr);
+  }
+
+  for(let s=1; s<=MAX; s++){
+    const b = document.createElement("button");
+    b.type = "button";
+    b.textContent = s;
+    b.setAttribute("aria-label", "Ir al paso " + s);
+    b.addEventListener("click", () => setStep(s));
+    dotsWrap.appendChild(b);
+  }
+
+  function eqHTML(terms, totals, step){
+    const parts = terms.slice(0, step).map((t, i) => {
+      if(i === step - 1) return '<span class="new-term">' + t + '</span>';
+      return t;
+    });
+    return parts.join(' + ') + ' = <span class="total">' + totals[step-1] + '</span>';
+  }
+
+  let step = 1;
+  function setStep(n){
+    step = Math.max(1, Math.min(MAX, n));
+    updateFigure(sqFig, step, "square");
+    updateFigure(rcFig, step, "rect");
+    sqDims.textContent = step + " × " + step;
+    rcDims.textContent = step + " × " + (step + 1);
+    sqEq.innerHTML = eqHTML(sqTerms, sqTotals, step);
+    rcEq.innerHTML = eqHTML(rcTerms, rcTotals, step);
+    sqRatio.textContent = "1 : 1";
+    rcRatio.textContent = step + " : " + (step + 1) + " (" + (step/(step+1)).toFixed(2) + ")";
+    stepLabel.textContent = "n = " + step;
+    prevBtn.disabled = step === 1;
+    nextBtn.disabled = step === MAX;
+    Array.from(dotsWrap.children).forEach((btn, i) => {
+      btn.classList.toggle("active", i === step - 1);
+    });
+  }
+
+  prevBtn.addEventListener("click", () => setStep(step - 1));
+  nextBtn.addEventListener("click", () => setStep(step + 1));
+
+  setStep(1);
+})();
+</script>
