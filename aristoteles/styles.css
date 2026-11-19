@@ -218,7 +218,6 @@ section h2 .num { color:var(--acento-secundario); font-weight:600; margin-right:
 .toc-parte a { font-size:1.15em; color:#1F4E79; }
 @media (max-width:768px) { .parte-sep-tit { font-size:1.7em; letter-spacing:.06em; } }
 @media print { .btn-mapa { display:none; } .parte-sep-tit { font-size:24pt; } }
-.c-000066{color:#000066}
 .c-000080{color:#000080}
 .c-0000ff{color:#0000ff}
 .c-003300{color:#003300}
@@ -228,25 +227,19 @@ section h2 .num { color:var(--acento-secundario); font-weight:600; margin-right:
 .c-12b32f{color:#12b32f}
 .c-12b4b0{color:#0b6f6d}
 .c-140080{color:#140080}
-.c-17365d{color:#17365d}
-.c-231f20{color:#231f20}
 .c-333399{color:#333399}
-.c-3366ff{color:#3366ff}
 .c-339966{color:#339966}
-.c-365f91{color:#365f91}
 .c-4447bf{color:#4447bf}
+.c-51e6cc{color:#328e7e}
 .c-666699{color:#666699}
 .c-6e006e{color:#6e006e}
-.c-76923c{color:#76923c}
 .c-800000{color:#800000}
 .c-800080{color:#800080}
 .c-808000{color:#808000}
 .c-820065{color:#820065}
 .c-836967{color:#836967}
-.c-943634{color:#943634}
 .c-993300{color:#993300}
 .c-993366{color:#993366}
 .c-ae1211{color:#ae1211}
 .c-dd1652{color:#dd1652}
-.c-f88957{color:#995435}
-.c-fa578e{color:#fa578e}
+.c-fa578e{color:#9b3558}
