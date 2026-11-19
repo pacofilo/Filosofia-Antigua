@@ -1,0 +1,109 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Virtudes éticas de Aristóteles</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gentium+Book+Plus:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+/* Layout: una sola tabla; cada fila es defecto → VIRTUD → exceso, con la virtud como columna central destacada */
+:root{
+  --bg:#f3f5f8; --surface:#ffffff; --fg:#1d2433; --muted:#5b6578; --line:#d9dee7;
+  --def:#2f6f9f; --def-bg:#e3eef7;
+  --vir:#8a6a00; --vir-bg:#fbf0c9; --vir-strong:#b88a00;
+  --exc:#b4423a; --exc-bg:#f9e2df;
+  --amb:#3f4a5c; --amb-bg:#e9ecf2;
+  --display:"Gentium Book Plus", Georgia, "Times New Roman", serif;
+  --body:"Source Sans 3", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121722; --surface:#1a2130; --fg:#e7ebf2; --muted:#9aa5b8; --line:#2c3547;
+  --def:#8cc1ea; --def-bg:#1c3247; --vir:#f2d27a; --vir-bg:#3a3014; --vir-strong:#e8be45;
+  --exc:#f0a29a; --exc-bg:#43211f; --amb:#c3cbd9; --amb-bg:#252d3d; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121722; --surface:#1a2130; --fg:#e7ebf2; --muted:#9aa5b8; --line:#2c3547;
+  --def:#8cc1ea; --def-bg:#1c3247; --vir:#f2d27a; --vir-bg:#3a3014; --vir-strong:#e8be45;
+  --exc:#f0a29a; --exc-bg:#43211f; --amb:#c3cbd9; --amb-bg:#252d3d; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1040px;margin:0 auto;padding-block:40px 56px;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  display:grid;gap:24px}
+header{display:grid;gap:8px}
+.eyebrow{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(1.9rem,4.5vw,2.8rem);line-height:1.1;margin:0;text-wrap:balance}
+.lead{margin:0;color:var(--muted);max-width:65ch}
+.legend{display:flex;flex-wrap:wrap;gap:10px}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:5px 12px;border-radius:999px;font-size:.88rem;font-weight:600}
+.chip i{width:10px;height:10px;border-radius:50%;display:block}
+.c-def{background:var(--def-bg);color:var(--def)} .c-def i{background:var(--def)}
+.c-vir{background:var(--vir-bg);color:var(--vir)} .c-vir i{background:var(--vir-strong)}
+.c-exc{background:var(--exc-bg);color:var(--exc)} .c-exc i{background:var(--exc)}
+.scroll{overflow-x:auto;border-radius:14px;border:1px solid var(--line);background:var(--surface)}
+table{width:100%;min-width:760px;border-collapse:collapse}
+th,td{padding:14px 16px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+tbody tr:last-child td{border-bottom:0}
+thead th{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+th.h-amb{color:var(--amb);background:var(--amb-bg)}
+th.h-def{color:var(--def);background:var(--def-bg)}
+th.h-vir{color:var(--vir);background:var(--vir-bg)}
+th.h-exc{color:var(--exc);background:var(--exc-bg)}
+td.amb{color:var(--muted);width:22%}
+td.def{color:var(--def);width:22%}
+td.exc{color:var(--exc);width:22%}
+td.vir{background:var(--vir-bg);border-left:3px solid var(--vir-strong);border-right:3px solid var(--vir-strong);width:34%}
+td.vir strong{display:block;font-family:var(--display);font-size:1.18rem;color:var(--fg);line-height:1.25}
+td.vir em{display:block;font-family:var(--display);color:var(--vir);font-size:.98rem;margin-top:2px}
+tbody tr:hover td.amb, tbody tr:hover td.def, tbody tr:hover td.exc{background:var(--bg)}
+tr.just td.vir{border-bottom:3px solid var(--vir-strong)}
+.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.note{padding:16px 18px;border-radius:12px;background:var(--surface);border:1px solid var(--line);min-width:0}
+.note h2{font-family:var(--display);font-size:1.1rem;margin:0 0 6px}
+.note p{margin:0;color:var(--muted);font-size:.95rem}
+.source{font-size:.85rem;color:var(--muted);margin:0}
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Aristóteles · Ética a Nicómaco, libros II–V</span>
+    <h1>Las virtudes éticas y el término medio</h1>
+    <p class="lead">Cada virtud del carácter es un término medio entre dos vicios: uno por defecto y otro por exceso. No es una media aritmética, sino lo adecuado según la recta razón y tal como lo determinaría el hombre prudente.</p>
+  </header>
+
+  <div class="legend" aria-label="Leyenda">
+    <span class="chip c-def"><i></i>Vicio por defecto</span>
+    <span class="chip c-vir"><i></i>Virtud (término medio)</span>
+    <span class="chip c-exc"><i></i>Vicio por exceso</span>
+  </div>
+
+  <div class="scroll">
+    <table>
+      <thead>
+        <tr>
+          <th class="h-amb" scope="col">Ámbito</th>
+          <th class="h-def" scope="col">Defecto</th>
+          <th class="h-vir" scope="col">Virtud</th>
+          <th class="h-exc" scope="col">Exceso</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="amb">Miedo y audacia</td><td class="def">Cobardía</td><td class="vir"><strong>Valentía o fortaleza</strong><em>andreía</em></td><td class="exc">Temeridad</td></tr>
+        <tr><td class="amb">Placeres corporales</td><td class="def">Insensibilidad</td><td class="vir"><strong>Templanza o moderación</strong><em>sophrosýne</em></td><td class="exc">Desenfreno</td></tr>
+        <tr><td class="amb">Dar y recibir dinero</td><td class="def">Avaricia</td><td class="vir"><strong>Liberalidad o generosidad</strong><em>eleutheriótes</em></td><td class="exc">Prodigalidad</td></tr>
+        <tr><td class="amb">Grandes gastos</td><td class="def">Mezquindad</td><td class="vir"><strong>Magnificencia</strong><em>megaloprépeia</em></td><td class="exc">Ostentación, vulgaridad</td></tr>
+        <tr><td class="amb">Grandes honores</td><td class="def">Pusilanimidad</td><td class="vir"><strong>Magnanimidad</strong><em>megalopsychía</em></td><td class="exc">Vanidad, fatuidad</td></tr>
+        <tr><td class="amb">Ira</td><td class="def">Indolencia, apatía</td><td class="vir"><strong>Mansedumbre o apacibilidad</strong><em>praótes</em></td><td class="exc">Irascibilidad</td></tr>
+        <tr><td class="amb">Hablar de uno mismo</td><td class="def">Falsa modestia</td><td class="vir"><strong>Veracidad o sinceridad</strong><em>alétheia</em></td><td class="exc">Jactancia</td></tr>
+        <tr><td class="amb">Diversión y broma</td><td class="def">Rusticidad, sosería</td><td class="vir"><strong>Ingenio o buen humor</strong><em>eutrapelía</em></td><td class="exc">Bufonería</td></tr>
+        <tr><td class="amb">Trato social</td><td class="def">Hosquedad</td><td class="vir"><strong>Amabilidad</strong><em>philía</em></td><td class="exc">Adulación, complacencia</td></tr>
+        <tr class="just"><td class="amb">Relaciones con los demás</td><td class="def">Padecer injusticia</td><td class="vir"><strong>Justicia</strong><em>dikaiosýne</em></td><td class="exc">Cometer injusticia</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="notes">
+    <div class="note"><h2>La prudencia no está en la tabla</h2><p>La <em>phrónesis</em> es una virtud dianoética, del intelecto. Aun así, es imprescindible para todas las éticas, porque determina en cada caso cuál es el término medio.</p></div>
+    <div class="note"><h2>La justicia, un caso aparte</h2><p>No es exactamente un medio entre dos vicios, sino dar a cada uno lo que le corresponde. Es la virtud más completa, porque mira al bien de los otros.</p></div>
+    <div class="note"><h2>No todo admite término medio</h2><p>Algunas acciones y pasiones son malas en sí mismas, como el robo, el asesinato o la envidia.</p></div>
+  </div>
+
+  <p class="source">Fuente: Aristóteles, <em>Ética a Nicómaco</em>, II 7, III–V.</p>
+</div>
+
+</body></html>
